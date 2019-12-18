@@ -251,7 +251,7 @@ namespace AzureFunctionForSplunk
             }
             catch (System.Net.Http.HttpRequestException e)
             {
-                throw new System.Net.Http.HttpRequestException("Sending to Proxy Function. Is the service running?", e.Message);
+                throw new System.Net.Http.HttpRequestException("Sending to Proxy Function. Is the service running?", e);
             }
             catch (Exception f)
             {
@@ -304,7 +304,7 @@ namespace AzureFunctionForSplunk
                 }
                 catch (System.Net.Http.HttpRequestException e)
                 {
-                    throw new System.Net.Http.HttpRequestException("Sending to Splunk. Is Splunk service running?", e);
+                    throw new System.Net.Http.HttpRequestException("Sending to Splunk. Is Splunk service running?", e.Message);
                 }
                 catch (Exception f)
                 {
