@@ -304,7 +304,7 @@ namespace AzureFunctionForSplunk
 
                 catch (System.Net.Http.HttpRequestException e)
                 {
-                    throw new System.Net.Http.HttpRequestException($"Sending to Splunk. Is Splunk service running:  {e.Message}," );
+                    throw new System.Net.Http.HttpRequestException($"Sending to Splunk. Is Splunk service running:  {e.Message}. The following is the StackTrace: {e.StackTrace} ");
                 }
                 catch (Exception f)
                 {
