@@ -44,7 +44,6 @@ namespace AzureFunctionForSplunk
     {
         public string id { get; set; }
         public string type { get; set; }
-
     }
 
     public class Utils
@@ -302,9 +301,10 @@ namespace AzureFunctionForSplunk
                         throw new System.Net.Http.HttpRequestException($"StatusCode from Splunk: {response.StatusCode}, and reason: {response.ReasonPhrase}");
                     }
                 }
+
                 catch (System.Net.Http.HttpRequestException e)
                 {
-                    throw new System.Net.Http.HttpRequestException("Sending to Splunk. Is Splunk service running?", e, "e.Message");
+                    throw new System.Net.Http.HttpRequestException("Sending to Splunk. Is Splunk service running: {e.Message}");
                 }
                 catch (Exception f)
                 {
