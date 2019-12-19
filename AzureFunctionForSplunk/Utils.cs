@@ -135,36 +135,36 @@ namespace AzureFunctionForSplunk
             }
         }
 
-        //public static bool ValidateMyCert(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors sslErr)
-        //{
-        //    // if user has not configured a cert, anything goes
-        //    if (string.IsNullOrWhiteSpace(splunkCertThumbprint))
-        //        return true;
-
-        //    // if user has configured a cert, must match
-        //    var thumbprint = cert.GetCertHashString();
-        //    if (thumbprint == splunkCertThumbprint)
-        //        return true;
-
-        //    return false;
-        //}
-
         public static bool ValidateMyCert(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors sslErr)
         {
-            // if user has not configured a cert, anything goes
-            if (string.IsNullOrWhiteSpace(splunkCertThumbprint))
-                return true;
+           // if user has not configured a cert, anything goes
+           if (string.IsNullOrWhiteSpace(splunkCertThumbprint))
+               return true;
 
-            // if user has configured a cert, must match
-            var numcerts = chain.ChainElements.Count;
-            var cacert = chain.ChainElements[numcerts - 1].Certificate;
+           // if user has configured a cert, must match
+           var thumbprint = cert.GetCertHashString();
+           if (thumbprint == splunkCertThumbprint)
+               return true;
 
-            var thumbprint = cacert.GetCertHashString().ToLower();
-            if (thumbprint == splunkCertThumbprint)
-                return true;
-
-            return false;
+           return false;
         }
+
+        // public static bool ValidateMyCert(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors sslErr)
+        // {
+        //     // if user has not configured a cert, anything goes
+        //     if (string.IsNullOrWhiteSpace(splunkCertThumbprint))
+        //         return true;
+
+        //     // if user has configured a cert, must match
+        //     var numcerts = chain.ChainElements.Count;
+        //     var cacert = chain.ChainElements[numcerts - 1].Certificate;
+
+        //     var thumbprint = cacert.GetCertHashString().ToLower();
+        //     if (thumbprint == splunkCertThumbprint)
+        //         return true;
+
+        //     return false;
+        // }
 
         public static async Task obEventhub(List<string> standardizedEvents, IAsyncCollector<string> outputEvents, ILogger log)
         {
